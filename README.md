@@ -1,2 +1,2 @@
-# Maciro-Game
+# Pinky-Game
  
