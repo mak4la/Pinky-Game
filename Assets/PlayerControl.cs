@@ -13,12 +13,18 @@ public class PlayerControl : MonoBehaviour
     public LayerMask whatIsGround;
     private bool isGrounded;
     private float minX, maxX, minY, maxY;
+    public int maxHealth = 3;
+    public int currentHealth;
+    public HeartController heartController;
+
     //public GameObject endSceneAnimator;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
+        UpdateHearts();
 
         speed = 6f;
         jumpForce = 20f;
@@ -84,6 +90,27 @@ public class PlayerControl : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Set vertical velocity to jumpForce
         isGrounded = false; // Update grounded state
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+        UpdateHearts();
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        SceneManager.LoadScene("MainMenu"); // Change this to your main menu scene name
+    }
+
+    private void UpdateHearts()
+    {
+        heartController.SetHeartState(currentHealth);
     }
 
 //private void OnTriggerEnter2D(Collider2D other)

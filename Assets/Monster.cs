@@ -8,8 +8,10 @@ public class Monster : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Destroy(other.gameObject); // Destroy the player object
-            Kill();
+            //Destroy(other.gameObject); // Destroy the player object
+            //Kill();
+            other.GetComponent<PlayerControl>().TakeDamage(1); // Damage the player by 1
+
         }
     }
 

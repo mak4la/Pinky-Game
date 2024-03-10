@@ -22,7 +22,7 @@ public class MainMenuHandler : MonoBehaviour
     public void Play() {
 
        //SceneManager.LoadScene("MainGame");
-       screenFader.FadeToColor("MainGame");
+       screenFader.FadeToColor("Platform");
 
     }
 
