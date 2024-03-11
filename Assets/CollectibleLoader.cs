@@ -15,6 +15,7 @@ public class CollectibleLoader : MonoBehaviour
             {
                 // Set the sprite of the empty slot to the collectible sprite
                 inventorySlots[i].sprite = collectibleSprite;
+                inventorySlots[i].color = Color.white;
 
                 // Debug statement to indicate successful loading
                 Debug.Log("Collectible loaded into slot " + i);
