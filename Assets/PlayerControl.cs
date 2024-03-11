@@ -16,6 +16,10 @@ public class PlayerControl : MonoBehaviour
     public int maxHealth = 3;
     public int currentHealth;
     public HeartController heartController;
+    public PlayerInventory playerInventory; // Reference to the player's inventory
+
+
+
 
     //public GameObject endSceneAnimator;
 
@@ -42,6 +46,8 @@ public class PlayerControl : MonoBehaviour
         // Set the gravity scale to control the falling speed
         rb.gravityScale = 3f;
     }
+
+    // This method is called when the player collects a new item
 
     private void Update()
     {
@@ -112,19 +118,27 @@ public class PlayerControl : MonoBehaviour
     {
         heartController.SetHeartState(currentHealth);
     }
+    // This method is called when the player collects a new item
+    public void CollectItem(Sprite itemSprite)
+    {
+        // Add the collected item sprite to the player's inventory
+        playerInventory.AddItem(itemSprite);
+    }
 
-//private void OnTriggerEnter2D(Collider2D other)
+
+    //private void OnTriggerEnter2D(Collider2D other)
     //{
-        //if (other.CompareTag("MonsterCounter"))
-        //{
-            //endSceneAnimator.GetComponent<Animator>().SetTrigger("StartEndSceneAnimation");
-            // Load MainMenu scene after a delay
-            //Invoke(nameof(ReturnToMainMenu), 1.5f);
-        //}
+    //if (other.CompareTag("MonsterCounter"))
+    //{
+    //endSceneAnimator.GetComponent<Animator>().SetTrigger("StartEndSceneAnimation");
+    // Load MainMenu scene after a delay
+    //Invoke(nameof(ReturnToMainMenu), 1.5f);
+    //}
     //}
 
     //private void ReturnToMainMenu()
     //{
-        //SceneManager.LoadScene("MainMenu");
+    //SceneManager.LoadScene("MainMenu");
     //}
+
 }
