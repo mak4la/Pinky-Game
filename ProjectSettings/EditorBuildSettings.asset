@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/BasicMovement.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainGame.unity
     guid: f13fa455b24804eaa828707589fd8ff4
+  - enabled: 1
+    path: Assets/Scenes/Platform.unity
+    guid: e3d2f09548e8d4639a5e3a300774f3eb
   m_configObjects: {}
