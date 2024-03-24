@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
     public int currentHealth;
     public HeartController heartController;
     public PlayerInventory playerInventory; // Reference to the player's inventory
+    private Vector3 respawnPoint;
 
 
 
@@ -29,6 +30,7 @@ public class PlayerControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         UpdateHearts();
+        respawnPoint = transform.position;
 
         speed = 6f;
         jumpForce = 20f;
@@ -123,6 +125,39 @@ public class PlayerControl : MonoBehaviour
     {
         // Add the collected item sprite to the player's inventory
         playerInventory.AddItem(itemSprite);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("NextLevel"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            respawnPoint = transform.position;
+        }
+        //else if (collision.CompareTag("PreviousLevel"))
+        //{
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            //respawnPoint = transform.position;
+        //}
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Check if the collision is with a cloud platform
+        if (collision.gameObject.CompareTag("CloudPlatform"))
+        {
+            isGrounded = true; // Set the flag to true
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // Check if the player leaves the cloud platform
+        if (collision.gameObject.CompareTag("CloudPlatform"))
+        {
+            isGrounded = false; // Reset the flag
+        }
     }
 
 

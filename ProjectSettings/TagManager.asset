@@ -9,6 +9,9 @@ TagManager:
   - MonsterCounter
   - Monster
   - InventoryPanel
+  - CloudPlatform
+  - NextLevel
+  - PreviousLevel
   layers:
   - Default
   - TransparentFX
@@ -19,8 +22,8 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
+  - CloudPlatform
+  - Player
   - 
   - 
   - 
