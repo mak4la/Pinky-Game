@@ -18,11 +18,12 @@ public class PlayerControl : MonoBehaviour
     public HeartController heartController;
     public PlayerInventory playerInventory; // Reference to the player's inventory
     private Vector3 respawnPoint;
+    private bool doubleJump = false;
 
 
-
-
-    //public GameObject endSceneAnimator;
+    public float damageCooldownDuration = 2f; // Cooldown duration after taking damage
+    private bool isImmune = false; // Flag to indicate player immunity
+    private float cooldownTimer = 0f; // Timer for cooldown duration
 
     void Start()
     {
@@ -34,7 +35,6 @@ public class PlayerControl : MonoBehaviour
 
         speed = 6f;
         jumpForce = 20f;
-        //transform.position = new Vector3(-83.1f, -38f, 0);
 
         Vector3 minScreenBounds = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
         Vector3 maxScreenBounds = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
@@ -49,65 +49,98 @@ public class PlayerControl : MonoBehaviour
         rb.gravityScale = 3f;
     }
 
-    // This method is called when the player collects a new item
-
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();
+            if (isGrounded)
+            {
+                Jump();
+                doubleJump = true;
+            }
+            else if (doubleJump)
+            {
+                Jump();
+                doubleJump = false;
+            }
+        }
+
+        // Update cooldown timer if player is currently immune
+        if (isImmune)
+        {
+            cooldownTimer -= Time.deltaTime;
+
+            // Reset immunity flag and cooldown timer when cooldown period ends
+            if (cooldownTimer <= 0f)
+            {
+                isImmune = false;
+                cooldownTimer = 0f;
+            }
         }
     }
 
     void FixedUpdate()
     {
+        // Update horizontal movement
+        moveHorizontal = Input.GetAxisRaw("Horizontal");
+
+        // Check if the player is grounded
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
-        if (isGrounded)
+        // Apply horizontal movement
+        rb.velocity = new Vector2(moveHorizontal * speed, rb.velocity.y);
+
+        // Flip the player sprite if moving left or right
+        if (moveHorizontal > 0)
         {
-            moveHorizontal = Input.GetAxisRaw("Horizontal");
-
-            if (moveHorizontal > 0)
-            {
-                transform.eulerAngles = new Vector3(0, 0, 0);
-            }
-            else if (moveHorizontal < 0)
-            {
-                transform.eulerAngles = new Vector3(0, 180, 0);
-            }
-
-            rb.velocity = new Vector2(moveHorizontal * speed, rb.velocity.y);
-
-            if (moveHorizontal == 0)
-            {
-                anim.SetBool("isWalking", false);
-            }
-            else
-            {
-                anim.SetBool("isWalking", true);
-            }
-
-            Vector3 newPosition = transform.position;
-            newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
-            newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
-            transform.position = newPosition;
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
+        else if (moveHorizontal < 0)
+        {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+
+        // Update walking animation
+        if (Mathf.Abs(moveHorizontal) > 0)
+        {
+            anim.SetBool("isWalking", true);
+        }
+        else
+        {
+            anim.SetBool("isWalking", false);
+        }
+
+        // Clamp player's position within screen bounds
+        Vector3 newPosition = transform.position;
+        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+        newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
+        transform.position = newPosition;
     }
+
+
 
     public void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Set vertical velocity to jumpForce
-        isGrounded = false; // Update grounded state
     }
+
 
     public void TakeDamage(int damageAmount)
     {
-        currentHealth -= damageAmount;
-        UpdateHearts();
-
-        if (currentHealth <= 0)
+        // Check if the player is immune to damage
+        if (!isImmune)
         {
-            Die();
+            currentHealth -= damageAmount;
+            UpdateHearts();
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+
+            // Activate cooldown and set cooldown timer
+            isImmune = true;
+            cooldownTimer = damageCooldownDuration;
         }
     }
 
@@ -120,6 +153,7 @@ public class PlayerControl : MonoBehaviour
     {
         heartController.SetHeartState(currentHealth);
     }
+
     // This method is called when the player collects a new item
     public void CollectItem(Sprite itemSprite)
     {
@@ -134,15 +168,9 @@ public class PlayerControl : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             respawnPoint = transform.position;
         }
-        //else if (collision.CompareTag("PreviousLevel"))
-        //{
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-            //respawnPoint = transform.position;
-        //}
     }
 
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         // Check if the collision is with a cloud platform
         if (collision.gameObject.CompareTag("CloudPlatform"))
@@ -151,7 +179,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         // Check if the player leaves the cloud platform
         if (collision.gameObject.CompareTag("CloudPlatform"))
@@ -159,21 +187,4 @@ public class PlayerControl : MonoBehaviour
             isGrounded = false; // Reset the flag
         }
     }
-
-
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //if (other.CompareTag("MonsterCounter"))
-    //{
-    //endSceneAnimator.GetComponent<Animator>().SetTrigger("StartEndSceneAnimation");
-    // Load MainMenu scene after a delay
-    //Invoke(nameof(ReturnToMainMenu), 1.5f);
-    //}
-    //}
-
-    //private void ReturnToMainMenu()
-    //{
-    //SceneManager.LoadScene("MainMenu");
-    //}
-
 }
