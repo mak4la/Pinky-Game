@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     public PlayerInventory playerInventory; // Reference to the player's inventory
     private Vector3 respawnPoint;
     private bool doubleJump = false;
+    private float bottomThreshold = -15f;
 
 
     public float damageCooldownDuration = 2f; // Cooldown duration after taking damage
@@ -115,6 +116,12 @@ public class PlayerControl : MonoBehaviour
         newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
         newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
         transform.position = newPosition;
+
+        if (transform.position.y < bottomThreshold)
+        {
+            transform.position = respawnPoint;
+            rb.velocity = Vector2.zero; // Reset velocity
+        }
     }
 
 
