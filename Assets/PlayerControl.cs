@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +21,10 @@ public class PlayerControl : MonoBehaviour
     private Vector3 respawnPoint;
     private bool doubleJump = false;
     private float bottomThreshold = -15f;
+
+    public AudioClip damageSound; // Sound effect for when the player takes damage
+    public AudioClip deathSound; // Sound effect for when the player dies
+    private AudioSource audioSource;
 
 
     public float damageCooldownDuration = 2f; // Cooldown duration after taking damage
@@ -48,6 +53,14 @@ public class PlayerControl : MonoBehaviour
 
         // Set the gravity scale to control the falling speed
         rb.gravityScale = 3f;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            // Add an AudioSource component if it's not already present
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
     }
 
     private void Update()
@@ -140,6 +153,12 @@ public class PlayerControl : MonoBehaviour
             currentHealth -= damageAmount;
             UpdateHearts();
 
+            // Play the damage sound
+            if (audioSource != null && damageSound != null)
+            {
+                audioSource.PlayOneShot(damageSound);
+            }
+
             if (currentHealth <= 0)
             {
                 Die();
@@ -153,8 +172,13 @@ public class PlayerControl : MonoBehaviour
 
     private void Die()
     {
+        if (audioSource && deathSound != null)
+        {
+            audioSource.PlayOneShot(deathSound);
+        }
         SceneManager.LoadScene("MainMenu"); // Change this to your main menu scene name
     }
+
 
     private void UpdateHearts()
     {
@@ -184,6 +208,7 @@ public class PlayerControl : MonoBehaviour
         {
             isGrounded = true; // Set the flag to true
         }
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -17,7 +19,8 @@ public class Monster : MonoBehaviour
 
     public void Kill()
     {
-        Destroy(this.gameObject);
+
+        Destroy(gameObject);
         MonsterCounter.Mcounter.RegisterMonster();
 
     }
