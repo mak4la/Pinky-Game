@@ -12,7 +12,7 @@ public class CoinCounter : MonoBehaviour
 
     private void Awake()
     {
-        if(Ccounter != null)
+        if (Ccounter != null)
         {
             Destroy(this.gameObject);
         }

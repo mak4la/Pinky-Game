@@ -3,28 +3,28 @@ using System.Collections.Generic;
 
 public class CollectibleManager : MonoBehaviour
 {
-    // List to store collected items
-    public List<Collectible> collectedItems = new List<Collectible>();
-
-    // Make sure the CollectibleManager persists between scenes
-    void Start()
-    {
-      
-    }
+    // List to store collected collectible game objects
+    public List<GameObject> collectedItems = new List<GameObject>();
 
     // Call this method whenever a new collectible is picked up
-    public void AddCollectedItem(Sprite itemSprite)
+    public void AddCollectedItem(GameObject collectible)
     {
-        // Create a new Collectible object using the provided sprite
-        Collectible collectible = new Collectible();
-        collectible.collectibleSprite = itemSprite;
-
         // Add the collected item to the list
         collectedItems.Add(collectible);
+        Debug.Log("Added collectible. Total collected: " + collectedItems.Count);
+
     }
 
-
+    // Method to check if all 4 collectibles are collected
+    public bool AllCollectiblesCollected()
+    {
+        // Check if the number of collected items equals 4
+        bool allCollected = collectedItems.Count == 4;
+        Debug.Log("All collectibles collected: " + allCollected);
+        return allCollected;
+    }
 }
+
 
 
 

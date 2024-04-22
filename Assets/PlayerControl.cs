@@ -25,6 +25,9 @@ public class PlayerControl : MonoBehaviour
     public AudioClip damageSound; // Sound effect for when the player takes damage
     public AudioClip deathSound; // Sound effect for when the player dies
     private AudioSource audioSource;
+    public AudioClip jumpSound;
+    public CollectibleManager collectibleManager; // Reference to the CollectibleManager
+
 
 
     public float damageCooldownDuration = 2f; // Cooldown duration after taking damage
@@ -61,9 +64,19 @@ public class PlayerControl : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
         }
 
-    }
+        collectibleManager = FindObjectOfType<CollectibleManager>();
+        if (collectibleManager == null)
+        {
+            Debug.LogError("CollectibleManager not found!");
+        }
+        else
+        {
+            Debug.Log("CollectibleManager found!");
+        }
 
-    private void Update()
+}
+
+private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -141,6 +154,10 @@ public class PlayerControl : MonoBehaviour
 
     public void Jump()
     {
+        if (audioSource != null && jumpSound != null)
+        {
+            audioSource.PlayOneShot(jumpSound);
+        }
         rb.velocity = new Vector2(rb.velocity.x, jumpForce); // Set vertical velocity to jumpForce
     }
 
@@ -180,11 +197,6 @@ public class PlayerControl : MonoBehaviour
     }
 
 
-    private void UpdateHearts()
-    {
-        heartController.SetHeartState(currentHealth);
-    }
-
     // This method is called when the player collects a new item
     public void CollectItem(Sprite itemSprite)
     {
@@ -192,12 +204,29 @@ public class PlayerControl : MonoBehaviour
         playerInventory.AddItem(itemSprite);
     }
 
+    private void UpdateHearts()
+    {
+        Debug.Log($"Updating hearts display. Current health: {currentHealth}");
+
+        heartController.SetHeartState(currentHealth);
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("NextLevel"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            respawnPoint = transform.position;
+            // Check if all collectibles are collected before loading the next scene
+            if (collectibleManager.AllCollectiblesCollected())
+            {
+                Debug.Log("All collectibles collected. Proceeding to next level.");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                respawnPoint = transform.position;
+            }
+            else
+            {
+                Debug.Log("Cannot proceed. Not all collectibles are collected.");
+            }
         }
     }
 
