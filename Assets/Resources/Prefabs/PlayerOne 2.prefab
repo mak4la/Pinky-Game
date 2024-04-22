@@ -445,7 +445,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: edafdc14036854c1d9f9ed39d537740e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.429
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -874,6 +874,7 @@ MonoBehaviour:
   damageSound: {fileID: 8300000, guid: b28b94a792bd6466082b1dd7897fc6f9, type: 3}
   deathSound: {fileID: 8300000, guid: b28b94a792bd6466082b1dd7897fc6f9, type: 3}
   jumpSound: {fileID: 8300000, guid: 1a942a785f9a94092ac0ca8c7d75abcf, type: 3}
+  collectibleManager: {fileID: 0}
   damageCooldownDuration: 2
 --- !u!50 &758130274013657761
 Rigidbody2D:
@@ -973,7 +974,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b28b94a792bd6466082b1dd7897fc6f9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.437
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1219,7 +1220,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: edafdc14036854c1d9f9ed39d537740e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.429
   m_Pitch: 1
   Loop: 0
   Mute: 0

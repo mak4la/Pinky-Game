@@ -2334,12 +2334,16 @@ PrefabInstance:
       value: Orangey
       objectReference: {fileID: 0}
     - target: {fileID: 8173277469796682296, guid: c15e401263ccd4e5f86350f7af3165ba, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8898
+      objectReference: {fileID: 0}
+    - target: {fileID: 8173277469796682296, guid: c15e401263ccd4e5f86350f7af3165ba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.3
+      value: 11.2606
       objectReference: {fileID: 0}
     - target: {fileID: 8173277469796682296, guid: c15e401263ccd4e5f86350f7af3165ba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.7
+      value: 15.22
       objectReference: {fileID: 0}
     - target: {fileID: 8173277469796682296, guid: c15e401263ccd4e5f86350f7af3165ba, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2407,13 +2411,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77633040eaa4a4e13bba6e5f196c7192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudPrefab: {fileID: 1642662572}
-  numberOfClouds: 30
+  coinPrefab: {fileID: 1292502055214155513, guid: a7f082d4b327c46dba97f69c69775768, type: 3}
+  numberOfCoins: 10
   minX: -25
   maxX: 40
   minY: -12
   maxY: 16
-  minSpacing: 2
+  minSpacing: 5
 --- !u!4 &1427002059
 Transform:
   m_ObjectHideFlags: 0
@@ -2668,11 +2672,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8721612444213048976, guid: 2d08ec4bd35ab4c2faefd795ed5c6b1c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3853
+      value: 1.001849
       objectReference: {fileID: 0}
     - target: {fileID: 8721612444213048976, guid: 2d08ec4bd35ab4c2faefd795ed5c6b1c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.1592621
+      value: 1.0194603
       objectReference: {fileID: 0}
     - target: {fileID: 8721612444213048976, guid: 2d08ec4bd35ab4c2faefd795ed5c6b1c, type: 3}
       propertyPath: m_LocalScale.z
@@ -2680,11 +2684,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8721612444213048976, guid: 2d08ec4bd35ab4c2faefd795ed5c6b1c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.9
+      value: -4.18
       objectReference: {fileID: 0}
     - target: {fileID: 8721612444213048976, guid: 2d08ec4bd35ab4c2faefd795ed5c6b1c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.6
+      value: 5.31
       objectReference: {fileID: 0}
     - target: {fileID: 8721612444213048976, guid: 2d08ec4bd35ab4c2faefd795ed5c6b1c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2876,11 +2880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1642662572 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8306812989204044504, guid: 71e8af6a629a5480cae3e5204745b461, type: 3}
-  m_PrefabInstance: {fileID: 205426419}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1685213412
 PrefabInstance:
   m_ObjectHideFlags: 0

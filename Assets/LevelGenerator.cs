@@ -2,46 +2,51 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    public GameObject cloudPrefab;
-    public int numberOfClouds = 10;
+    public GameObject coinPrefab;
+    public int numberOfCoins = 10;
     public float minX = -25f;
     public float maxX = 40f;
     public float minY = -12f;
     public float maxY = 16f;
-    public float minSpacing = 2f; // Minimum distance between clouds
+    public float minSpacing = 5f; // Minimum distance between coins
 
     void Start()
     {
-        GenerateClouds();
+        GenerateCoins();
     }
 
-    void GenerateClouds()
+    void GenerateCoins()
     {
-        for (int i = 0; i < numberOfClouds; i++)
+        for (int i = 0; i < numberOfCoins; i++)
         {
             // Generate random position within the specified range
-            float randomX = Random.Range(minX, maxX);
-            float randomY = Random.Range(minY, maxY);
+            Vector2 randomPosition;
+            bool validPosition = false;
 
-            // Check if the new cloud position violates the minimum spacing rule
-            bool validPosition = true;
-            foreach (var cloud in GameObject.FindGameObjectsWithTag("CloudPlatform"))
+            // Keep generating random positions until a valid one is found
+            do
             {
-                if (Vector2.Distance(cloud.transform.position, new Vector2(randomX, randomY)) < minSpacing)
-                {
-                    validPosition = false;
-                    break;
-                }
-            }
+                randomPosition = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+                validPosition = IsPositionValid(randomPosition);
+            } while (!validPosition);
 
-            // Instantiate the cloud prefab at the random position if it meets the rules
-            if (validPosition)
-            {
-                Instantiate(cloudPrefab, new Vector3(randomX, randomY, 0), Quaternion.identity);
-            }
+            // Instantiate the coin prefab at the random position
+            Instantiate(coinPrefab, randomPosition, Quaternion.identity);
         }
     }
+
+    bool IsPositionValid(Vector2 position)
+    {
+        // Check if the position is too close to any cloud platform
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, minSpacing);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("CloudPlatform"))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }
-
-
 
