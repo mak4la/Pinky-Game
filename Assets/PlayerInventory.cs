@@ -5,6 +5,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public GameObject inventoryUI; // Reference to the inventory UI panel
     public List<Sprite> collectedItems = new List<Sprite>(); // List to store collected item sprites
+    public InventoryUI inventoryUIScript; // Reference to the InventoryUI script
 
     // Add item to the inventory
     public void AddItem(Sprite itemSprite)
@@ -13,11 +14,18 @@ public class PlayerInventory : MonoBehaviour
         UpdateInventoryUI(); // Call method to update inventory UI
     }
 
-    // Method to update the inventory UI (to be implemented)
+    // Update the inventory UI with collected items
     private void UpdateInventoryUI()
     {
-        // You'll implement this method to update the UI with the collected items
-        // You can either handle UI updates directly here or call a separate method in the InventoryUI script
+        if (inventoryUIScript != null)
+        {
+            // Pass the array of collected item sprites to the InventoryUI script
+            inventoryUIScript.UpdateInventory(collectedItems.ToArray());
+        }
+        else
+        {
+            Debug.LogWarning("InventoryUI script reference is missing!");
+        }
     }
 
     // Open or close the inventory
@@ -26,6 +34,7 @@ public class PlayerInventory : MonoBehaviour
         inventoryUI.SetActive(!inventoryUI.activeSelf);
     }
 }
+
 
 
 

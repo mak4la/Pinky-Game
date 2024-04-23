@@ -3,30 +3,23 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     public Sprite collectibleSprite; // The sprite of the collectible
-    private CollectibleManager collectibleManager; // Reference to the CollectibleManager
-
-    private void Start()
-    {
-        collectibleManager = FindObjectOfType<CollectibleManager>();
-        if (collectibleManager == null)
-        {
-            Debug.LogError("CollectibleManager not found!");
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            // Check if the CollectibleManager reference is valid
-            if (collectibleManager != null)
+            // Access the CollectibleLoader component on the inventory panel
+            CollectibleLoader collectibleLoader = FindObjectOfType<CollectibleLoader>();
+
+            // Check if the CollectibleLoader component is found
+            if (collectibleLoader != null)
             {
-                // Call the AddCollectedItem method to add this collectible to the list
-                collectibleManager.AddCollectedItem(gameObject);
+                // Call the LoadCollectible method to load the collectible sprite into an empty slot
+                collectibleLoader.LoadCollectible(collectibleSprite);
             }
             else
             {
-                Debug.LogWarning("CollectibleManager reference is null!");
+                Debug.LogWarning("CollectibleLoader not found!");
             }
 
             // Hide or deactivate the collectible object
