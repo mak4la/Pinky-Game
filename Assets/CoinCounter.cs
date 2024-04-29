@@ -25,7 +25,7 @@ public class CoinCounter : MonoBehaviour
         totalCoins = FindObjectsOfType<Coin>().Length; // Assuming you have a Coin script for your coin objects
 
         // Update the coin counter text
-        coinCounterText.text = "COINS: 0/" + totalCoins;
+        coinCounterText.text = "COINS COLLECTED: ";
 
         // Find the player control script in the scene
         player = FindObjectOfType<PlayerControl>();
