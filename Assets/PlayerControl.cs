@@ -211,6 +211,16 @@ private void Update()
         heartController.SetHeartState(currentHealth);
     }
 
+    public void RestoreLife()
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth++;
+            UpdateHearts();
+        }
+    }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

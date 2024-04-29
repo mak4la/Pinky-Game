@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class CoinCounter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI coinCounterText;
     public static CoinCounter Ccounter;
-    int coinsCollected = 0;
+
+    private int coinsCollected = 0;
+    private int totalCoins; // Total number of coins in the scene
+    private PlayerControl player; // Reference to the player
 
     private void Awake()
     {
@@ -16,20 +16,45 @@ public class CoinCounter : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
         Ccounter = this;
     }
 
-
-
     void Start()
     {
+        // Initialize total number of coins in the scene
+        totalCoins = FindObjectsOfType<Coin>().Length; // Assuming you have a Coin script for your coin objects
 
+        // Update the coin counter text
+        coinCounterText.text = "COINS: 0/" + totalCoins;
+
+        // Find the player control script in the scene
+        player = FindObjectOfType<PlayerControl>();
     }
 
     public void RegisterCoin()
     {
-        coinsCollected += 1;
-        coinCounterText.text = "COINS: " + coinsCollected.ToString();
+        coinsCollected++;
+
+        // Update the coin counter text
+        coinCounterText.text = "COINS COLLECTED: " + coinsCollected;
+
+        Debug.Log("Coin collected! Total: " + coinsCollected);
+
+        // Check if every 5 coins are collected to regenerate a heart
+        if (coinsCollected % 5 == 0)
+        {
+            RegenerateHeart();
+        }
+    }
+
+    private void RegenerateHeart()
+    {
+        // Check if player exists and current health is less than max health
+        if (player != null && player.currentHealth < player.maxHealth)
+        {
+            // Regenerate a heart
+            player.RestoreLife();
+            Debug.Log("Heart regenerated! Current Health: " + player.currentHealth);
+        }
     }
 }
