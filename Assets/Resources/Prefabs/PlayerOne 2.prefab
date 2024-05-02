@@ -870,7 +870,7 @@ MonoBehaviour:
   maxHealth: 3
   currentHealth: 0
   heartController: {fileID: 0}
-  playerInventory: {fileID: 0}
+  playerInventory: {fileID: 4344293414461176337}
   damageSound: {fileID: 8300000, guid: b28b94a792bd6466082b1dd7897fc6f9, type: 3}
   deathSound: {fileID: 8300000, guid: b28b94a792bd6466082b1dd7897fc6f9, type: 3}
   jumpSound: {fileID: 8300000, guid: 1a942a785f9a94092ac0ca8c7d75abcf, type: 3}
@@ -962,6 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 0}
   collectedItems: []
+  inventoryUIScript: {fileID: 0}
 --- !u!82 &1526403973571554772
 AudioSource:
   m_ObjectHideFlags: 0
