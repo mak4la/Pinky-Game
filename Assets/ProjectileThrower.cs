@@ -1,18 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileThrower : MonoBehaviour
 {
-
-    [SerializeField] GameObject projectilePrefab;
-    [SerializeField] float speed = 5;
+    [SerializeField] private float speed = 5;
 
     public void Launch(Vector3 targetPos)
     {
-        GameObject newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject newProjectile = ObjectPool.Instance.GetObjectFromPool();
+        newProjectile.transform.position = transform.position;
         newProjectile.transform.rotation = Quaternion.LookRotation(transform.forward, targetPos - transform.position);
         newProjectile.GetComponent<Rigidbody2D>().velocity = newProjectile.transform.up * speed;
-        Destroy(newProjectile, 5);
+
+        // Activate a coroutine to deactivate the projectile after a certain time
+        StartCoroutine(DeactivateAfterTime(newProjectile, 5));
+    }
+
+    private IEnumerator DeactivateAfterTime(GameObject projectile, float time)
+    {
+        yield return new WaitForSeconds(time);
+        projectile.SetActive(false);
     }
 }

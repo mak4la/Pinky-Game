@@ -202,6 +202,7 @@ private void Update()
     {
         // Add the collected item sprite to the player's inventory
         playerInventory.AddItem(itemSprite);
+
     }
 
     private void UpdateHearts()
