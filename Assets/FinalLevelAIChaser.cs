@@ -1,38 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class FinalLevelAIPatrol : MonoBehaviour
+
+public class FinalLevelAIChaser : MonoBehaviour
 {
-    public float patrolSpeed = 5f;
-    public Transform[] patrolPoints;
-    public float stoppingDistance = 0.1f;
     public GameObject player;
-
-
-    private int currentPatrolIndex = 0;
+    public float chaseSpeed = 8f;
+    public float detectionRange = 10f;
+    private FinalLevelAIPatrol patrolScript;
+    private bool isChasing = false;
 
     void Start()
     {
-        if (patrolPoints.Length == 0)
+        patrolScript = GetComponent<FinalLevelAIPatrol>();
+        if (patrolScript == null)
         {
-            Debug.LogError("Patrol points are not set for AI patrol.");
-            enabled = false; // Disable the script if no patrol points are set
+            Debug.LogError("FinalLevelAIChaser requires FinalLevelAIPatrol component!");
+            enabled = false; // Disable the script if FinalLevelAIPatrol component is not found
         }
     }
 
     void Update()
     {
-        if (patrolPoints.Length == 0)
+        if (player == null)
             return;
 
-        // Move towards the current patrol point
-        Vector3 targetPosition = patrolPoints[currentPatrolIndex].position;
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, patrolSpeed * Time.deltaTime);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        // Check if the monster has reached the patrol point
-        if (Vector3.Distance(transform.position, targetPosition) < stoppingDistance)
+        if (distanceToPlayer <= detectionRange)
         {
-            // Move to the next patrol point
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+            isChasing = true;
+            ChasePlayer();
+        }
+        else if (isChasing)
+        {
+            isChasing = false;
+            ResumePatrol();
+        }
+    }
+
+    void ChasePlayer()
+    {
+        // Calculate direction towards the player
+        Vector3 direction = (player.transform.position - transform.position).normalized;
+
+        // Move towards the player
+        transform.position += direction * chaseSpeed * Time.deltaTime;
+    }
+
+    void ResumePatrol()
+    {
+        // If the patrol script is available, resume patrolling
+        if (patrolScript != null)
+        {
+            patrolScript.enabled = true;
         }
     }
 }
+
+

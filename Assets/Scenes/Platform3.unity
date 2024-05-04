@@ -538,9 +538,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -3297366.2}
+  m_Offset: {x: 0, y: 5449321}
   serializedVersion: 2
-  m_Radius: 1.996342
+  m_Radius: 3.039028
 --- !u!114 &60324956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2237,7 +2237,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 78a9c07533b3648098dad04d30c9f134, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.268
-  m_Pitch: 1
+  m_Pitch: -1.5
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -7760,9 +7760,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -3297366.2}
+  m_Offset: {x: 0, y: 3928154}
   serializedVersion: 2
-  m_Radius: 1.996342
+  m_Radius: 2.8576913
 --- !u!1 &1544506059 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8306812989204044504, guid: 71e8af6a629a5480cae3e5204745b461, type: 3}

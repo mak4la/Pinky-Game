@@ -4358,6 +4358,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinCountText
       objectReference: {fileID: 0}
+    - target: {fileID: 4820207940905178261, guid: b622755c6c35d4561884dbb3bc311f40, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

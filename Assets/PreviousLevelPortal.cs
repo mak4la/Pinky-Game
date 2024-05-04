@@ -8,7 +8,7 @@ public class PreviousLevelPortal : MonoBehaviour
 {
     private bool playerInRange = false;
     private float timer = 0f;
-    private float teleportDelay = 5f;
+    private float teleportDelay = 10f;
 
     private void Update()
     {
