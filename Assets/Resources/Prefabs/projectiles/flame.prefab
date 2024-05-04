@@ -162,7 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25d37cd0dd524e48b8c021f0b9ef74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killBossSound: {fileID: 8300000, guid: e18d60cf10591417cb218ab246600eae, type: 3}
   killSound: {fileID: 8300000, guid: e18d60cf10591417cb218ab246600eae, type: 3}
+  bossDamage: 5
 --- !u!82 &4811926753302012378
 AudioSource:
   m_ObjectHideFlags: 0

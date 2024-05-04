@@ -1,33 +1,50 @@
-using System.Collections;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject monsterPrefab;
-    [SerializeField] private float spawnRange = 3;
+    public GameObject monsterPrefab; // Reference to the monster prefab
+    public Transform[] spawnPoints; // Array of spawn points
+    public float spawnInterval = 2f; // Time interval between spawns
+    public float detectionRange = 5f; // Detection range of the monsters
 
-    // Start is called before the first frame update
-    void Start()
+    private Transform player; // Reference to the player's transform
+
+    private void Start()
     {
-        StartCoroutine(SpawnMonsterRoutine());
+        // Find the player object by tag
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        // Start spawning monsters
+        InvokeRepeating("SpawnMonster", 0f, spawnInterval);
     }
 
-    IEnumerator SpawnMonsterRoutine()
+    private void SpawnMonster()
     {
-        while (true)
+        // Choose a random spawn point
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+        // Instantiate the monster at the chosen spawn point
+        GameObject monster = Instantiate(monsterPrefab, spawnPoint.position, Quaternion.identity);
+
+        // Get the monster's AI script and set the player as the target
+        FinalLevelAIPatrol aiChaser = monster.GetComponent<FinalLevelAIPatrol>();
+        if (aiChaser != null)
         {
-            yield return new WaitForSeconds(3);
-            SpawnMonsterRandom();
+            aiChaser.player = player.gameObject;
+        }
+        else
+        {
+            Debug.LogWarning("Monster prefab does not have an FinalLevelAIPatrol component!");
         }
     }
 
-    void SpawnMonsterRandom()
+    private void OnDrawGizmosSelected()
     {
-        float randomX = Random.Range(-7.63f, 8.25f); // Generate a random X coordinate
-        float randomY = Random.Range(7.21f, 7.23f); // Generate a random Y coordinate
-        Vector3 spawnPosition = new Vector3(randomX,randomY, 0); // Create a spawn position vector
-        GameObject newMonster = Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
-        Destroy(newMonster, 3);
+        // Draw detection range gizmos for all spawn points
+        Gizmos.color = Color.red;
+        foreach (Transform spawnPoint in spawnPoints)
+        {
+            Gizmos.DrawWireSphere(spawnPoint.position, detectionRange);
+        }
     }
 }
-

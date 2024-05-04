@@ -3,44 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
-
 {
-    public AudioClip killSound; // The sound clip to play when the coin is collected
+    public AudioClip killSound; // The sound clip to play when the projectile hits the boss monster
     private AudioSource audioSource; // Reference to the AudioSource component
+    public int bossDamage = 5; // Damage inflicted on the boss monster
 
     private void Awake()
     {
-        // Get the AudioSource component attached to the coin
+        // Get the AudioSource component attached to the projectile
         audioSource = GetComponent<AudioSource>();
 
-        // Assign the collect sound to the AudioSource component
+        // Assign the kill sound to the AudioSource component
         if (killSound != null)
         {
             audioSource.clip = killSound;
+
         }
     }
-    //void OnTriggerEnter2D(Collider2D other)
-    //{
-    //if (other.CompareTag("CoinCounter")) // Check for the "Coin" tag
-    //{
-    //Destroy(other.gameObject); // Destroy the coin
-    //Destroy(gameObject); // Destroy the projectile
 
-
-    //CoinCounter.Ccounter.RegisterCoin(); // Register the collected coin
-    //}
-    //else if (other.CompareTag("MonsterCounter")) // Check for the "Monster" tag
-    //{
-    //Destroy(other.gameObject); // Destroy the monster
-    //Destroy(gameObject); // Destroy the projectile
-
-
-    //MonsterCounter.Mcounter.RegisterMonster(); // Register the defeated monster
-    //}
-
-    //}
-
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Monster")) // Check for the "Monster" tag
         {
@@ -51,12 +32,22 @@ public class Projectile : MonoBehaviour
                 {
                     audioSource.PlayOneShot(killSound);
                 }
-
-                monster.Kill(); // Call the TakeDamage method of the monster
+                monster.Kill(); // Call the Kill method of the monster
                 Destroy(gameObject, audioSource.clip.length);
-
-                //Destroy(gameObject); // Destroy the projectile
             }
+        }
+        else if (other.CompareTag("BossMonster")) // Check for the "BossMonster" tag
+        {
+            BossHealthBar bossHealthBar = other.GetComponent<BossHealthBar>();
+            if (bossHealthBar != null)
+            {
+                //bossHealthBar.TakeDamage(bossDamage);// Deduct health from the boss monster
+                    bossHealthBar.TakeDamage(bossDamage);// Deduct health from the boss monster
+                
+            }
+            gameObject.SetActive(false); // Deactivate the projectile instead of destroying it
+            //Destroy(gameObject); // Destroy the projectile after hitting the boss monster
         }
     }
 }
+

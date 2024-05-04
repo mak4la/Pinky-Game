@@ -12,6 +12,7 @@ TagManager:
   - CloudPlatform
   - NextLevel
   - PreviousLevel
+  - BossMonster
   layers:
   - Default
   - TransparentFX
