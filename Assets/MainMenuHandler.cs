@@ -23,9 +23,9 @@ public class MainMenuHandler : MonoBehaviour
 
         //SceneManager.LoadScene("MainGame");
         //screenFader.FadeToColor("Platform");
-        screenFader.FadeToColor("Platform");
+        //screenFader.FadeToColor("Platform");
 
-        //SceneManager.LoadScene("Platform");
+        SceneManager.LoadScene("Platform");
 
 
     }

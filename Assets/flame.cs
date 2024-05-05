@@ -34,6 +34,7 @@ public class flame : MonoBehaviour
             if (audioSource != null && flameLaunchSound != null)
             {
                 audioSource.PlayOneShot(flameLaunchSound);
+
             }
         }
     }
