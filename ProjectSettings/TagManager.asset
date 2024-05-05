@@ -13,6 +13,7 @@ TagManager:
   - NextLevel
   - PreviousLevel
   - BossMonster
+  - Projectile
   layers:
   - Default
   - TransparentFX
