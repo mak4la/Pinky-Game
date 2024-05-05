@@ -7841,6 +7841,34 @@ PrefabInstance:
       value: QuitButton
       objectReference: {fileID: 0}
     - target: {fileID: 9120980295905219550, guid: 725b6692aa7824cc4859e7caf84ffa24, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 2105078608}
+    - target: {fileID: 9120980295905219550, guid: 725b6692aa7824cc4859e7caf84ffa24, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.7019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120980295905219550, guid: 725b6692aa7824cc4859e7caf84ffa24, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.57254905
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120980295905219550, guid: 725b6692aa7824cc4859e7caf84ffa24, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.9921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120980295905219550, guid: 725b6692aa7824cc4859e7caf84ffa24, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.76470596
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120980295905219550, guid: 725b6692aa7824cc4859e7caf84ffa24, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.6666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120980295905219550, guid: 725b6692aa7824cc4859e7caf84ffa24, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.93725497
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120980295905219550, guid: 725b6692aa7824cc4859e7caf84ffa24, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 504883676}
@@ -9613,6 +9641,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71e8af6a629a5480cae3e5204745b461, type: 3}
+--- !u!114 &2105078608 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7519996925528391000, guid: 725b6692aa7824cc4859e7caf84ffa24, type: 3}
+  m_PrefabInstance: {fileID: 1626639686}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2118902445
 GameObject:
   m_ObjectHideFlags: 0
