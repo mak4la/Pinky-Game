@@ -965,7 +965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8082955327245020001, guid: f21f5a9d654944a2bb0d272e24739425, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -726.99994
+      value: -727
       objectReference: {fileID: 0}
     - target: {fileID: 8082955327245020001, guid: f21f5a9d654944a2bb0d272e24739425, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1013,17 +1013,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4563740990856017230, guid: f21f5a9d654944a2bb0d272e24739425, type: 3}
   m_PrefabInstance: {fileID: 73712791}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &73712793 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6505086637295913238, guid: f21f5a9d654944a2bb0d272e24739425, type: 3}
-  m_PrefabInstance: {fileID: 73712791}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73712792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &73712794 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7726827865282544439, guid: f21f5a9d654944a2bb0d272e24739425, type: 3}
@@ -3936,7 +3925,7 @@ PrefabInstance:
     - target: {fileID: 3480702663441601099, guid: 5ec1486efaf5e46bc80a8e9deb238fb5, type: 3}
       propertyPath: inventorySlots.Array.data[2]
       value: 
-      objectReference: {fileID: 73712793}
+      objectReference: {fileID: 1899342766}
     - target: {fileID: 3480702663441601099, guid: 5ec1486efaf5e46bc80a8e9deb238fb5, type: 3}
       propertyPath: inventorySlots.Array.data[3]
       value: 
@@ -6927,7 +6916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.1900024, y: -104.17999}
+  m_AnchoredPosition: {x: -7.1899414, y: -104.17993}
   m_SizeDelta: {x: -1084.38, y: -259.16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1077943853
@@ -12367,6 +12356,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 1
+--- !u!114 &1899342766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4192144267581374398, guid: f21f5a9d654944a2bb0d272e24739425, type: 3}
+  m_PrefabInstance: {fileID: 73712791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1913626828
 PrefabInstance:
   m_ObjectHideFlags: 0
