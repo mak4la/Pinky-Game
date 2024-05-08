@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class flame : MonoBehaviour
 {
-
     public AudioClip flameLaunchSound; // The sound clip to play when launching the flame
     private AudioSource audioSource; // Reference to the AudioSource component
 
@@ -18,11 +17,9 @@ public class flame : MonoBehaviour
 
         if (audioSource == null)
         {
-            //Add an AudioSource component if it's not already present
+            // Add an AudioSource component if it's not already present
             audioSource = gameObject.AddComponent<AudioSource>();
         }
-
-
     }
 
     // Update is called once per frame
@@ -34,7 +31,6 @@ public class flame : MonoBehaviour
             if (audioSource != null && flameLaunchSound != null)
             {
                 audioSource.PlayOneShot(flameLaunchSound);
-
             }
         }
     }

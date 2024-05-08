@@ -38,9 +38,9 @@ public class BossMonster : MonoBehaviour
 
     public void Kill()
     {
-
-        Destroy(gameObject);
-        MonsterCounter.Mcounter.RegisterMonster();
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
+        //MonsterCounter.Mcounter.RegisterMonster();
 
     }
 }

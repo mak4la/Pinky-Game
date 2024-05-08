@@ -19,10 +19,10 @@ public class Monster : MonoBehaviour
 
     public void Kill()
     {
-
-        Destroy(gameObject);
-        MonsterCounter.Mcounter.RegisterMonster();
-
+        gameObject.SetActive(false); // Deactivate the monster instead of destroying it
+        //Destroy(gameObject);
+        //MonsterCounter.Mcounter.RegisterMonster();
+        
     }
 
 
